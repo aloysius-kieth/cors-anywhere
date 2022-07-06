@@ -6,10 +6,10 @@ import cors from "cors";
 dotenv.config();
 
 const SETTINGS = {
-  url: process.env.API_URL,
-  port: process.env.PORT,
-  email: process.env.email,
-  password: process.env.password,
+  url: process.env.API_URL || "",
+  port: process.env.PORT || 3000,
+  email: process.env.email || "",
+  password: process.env.password || "",
 };
 
 const app: Express = express();
@@ -19,6 +19,8 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 app.use(cors());
 
 let authToken = "";
+var email: string = SETTINGS.email;
+var password: string = SETTINGS.password;
 
 const API_URL = SETTINGS.url;
 const LOGIN_ENDPOINT = "login";
@@ -123,7 +125,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get("/login", (req: Request, res: Response) => {
-  const r = login(SETTINGS.email, SETTINGS.password).then((response) => {
+  const r = login(email, password).then((response) => {
     //console.log(response);
     let data = JSON.stringify(response);
     res.send(data);
