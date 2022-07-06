@@ -148,7 +148,7 @@ app.post("/sendGameResult", (req: Request, res: Response) => {
   });
 });
 
-const PORT = SETTINGS.port || 3000;
+const PORT = SETTINGS.port || 5000;
 app.listen(PORT, () => {
   console.log(
     `⚡️[Proxy Server]: Server is running at http://localhost:${PORT}`

@@ -4,10 +4,16 @@
   "description": "proxy server for APIs",
   "main": "server.ts",
   "scripts": {
-    "start": "ts-node server.ts",
+    "start": "node dist/server.js",
+    "start-dev": "ts-node server.ts",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q server.ts\"",
     "build": "npx tsc",
+    "postinstall": "tsc",
+    "deploy": "git push heroku master",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "14.x"
   },
   "keywords": [
     "proxy",

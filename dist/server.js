@@ -45,14 +45,18 @@ var axios_1 = __importDefault(require("axios"));
 var cors_1 = __importDefault(require("cors"));
 dotenv_1.default.config();
 var SETTINGS = {
-    url: process.env.API_URL,
-    port: process.env.PORT,
+    url: process.env.API_URL || "",
+    port: process.env.PORT || 3000,
+    email: process.env.email || "",
+    password: process.env.password || "",
 };
 var app = (0, express_1.default)();
 app.use(express_1.default.json()); // for parsing application/json
 app.use(express_1.default.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use((0, cors_1.default)());
 var authToken = "";
+var email = SETTINGS.email;
+var password = SETTINGS.password;
 var API_URL = SETTINGS.url;
 var LOGIN_ENDPOINT = "login";
 var GET_LEADERBOARD_ENDPOINT = "weeklyleaderboard";
@@ -144,7 +148,7 @@ var sendGameResult = function (_score, _name) { return __awaiter(void 0, void 0,
                     })];
             case 1:
                 data = (_c.sent()).data;
-                console.log(data);
+                //console.log(data);
                 return [2 /*return*/, data];
             case 2:
                 error_3 = _c.sent();
@@ -165,7 +169,7 @@ app.get("/", function (req, res) {
     res.send("Proxy Express Server to bypass CORS Origin...");
 });
 app.get("/login", function (req, res) {
-    var r = login("trinax@yopmail.com", "Password$1").then(function (response) {
+    var r = login(email, password).then(function (response) {
         //console.log(response);
         var data = JSON.stringify(response);
         res.send(data);
