@@ -126,7 +126,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.get("/login", (req: Request, res: Response) => {
   const r = login(email, password).then((response) => {
-    //console.log(response);
+    console.log(response);
     let data = JSON.stringify(response);
     res.send(data);
   });
